@@ -37,7 +37,7 @@ Congratulations! You are now running your own local instance of KGRobot.
 ### Creating your own module
 1. Create a new file for your module in the /modules directory.  The name should be {your_module}.js.
 2. Declare a new object that will provide your functionality and keep a reference to the core module:
-```
+```javascript
 var myModule = {
 	core: null,
 	
@@ -50,7 +50,7 @@ var myModule = {
 	}
 ```
 3. Declare that your module can be required by the primary module, and save a reference to the core module:
-```
+```javascript
 module.exports = function (core) {
 	myModule.core = core;
 	myModule.init();
@@ -58,7 +58,7 @@ module.exports = function (core) {
 }
 ```
 4. In the primary module, require your new module:
-```
+```javascript
 // Load modules
 require('./modules/lunch')(core);
 require('./modules/quotes')(core);
@@ -66,11 +66,57 @@ require('./modules/myModule')(core);
 ```
 
 ### Subscribing to messages
+1. Write a function that will be invoked when the bot receives a message.
+```javascript
+var myModule = {
+	core: null,
+	
+	init: function () {
+		//YOUR INITIALIZATION CODE HERE
+	},
+	
+	//YOUR MODULE CODE HERE
+	
+	myMessageHandler: function (message) {
+		var chatId = message.chat.id;
+		var sender = message.from;
+		var senderFirstName = from.first_name;
+		var senderLastName = from.last_name;
+		var messageText = message.text;
+	}
+}
+```
+2. You can get any information you need about the incoming message from the 'message' object, documented here: https://core.telegram.org/bots/api#message
+3. Register your new function to be called when the bot receives keywords:
+```javascript
+init: function () {
+		this.core.registerKeywords(this.myMessageHandler.bind(this), [["KGRobot", "kgbot"], "my", "keywords");
+}
+```
+You can provide one or multiple keywords.  All keywords in the list parameters are treated as required.  If the list contains a sublist, one of the keywords in the sublist will be required.
+
+If the bot receives a message that includes all of your keywords, the function passed in the first parameter will be called with the message data.
 
 ### Replying to messages
+The core module provides a very easy way to respond to messages. You must provide the chatId and the text for the response.
+```javascript
+this.core.telegram.sendMessage(message.chat.id, 'Your response text here');
+```javascript
 
 ### Saving data
-
+The core module provides a very easy way to persist data for your module. You can access the storedData object from the core module as follows:
+```javascript
+var storedData = this.core.storedData;
+```
+By convention, you should store your module's data in subobjects prefixed with your module name:
+```javascript
+var myData = 'data here!';
+this.core.storedData.myModule_myData = myData;
+```
+That's it! You can access your data later and it will persist after server restarts.
+```javascript
+var myData = this.core.storedData.myModule_myData;
+```
 
 
 
