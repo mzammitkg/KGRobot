@@ -4,8 +4,6 @@ KGRobot is KG's automated Telegram assisant.
 The KGRobot project was started with the goal of providing KG with utility, fun, and an opportunity for non-developers to get their hands dirty with a simple coding project.
 
 ## Features
-There are already several modules that provide 
-
 ### Lunch
 KGRobot is here to be helpful!  You can ask the bot what we will be having for Friday lunch this week.  If he knows, he will tell you!  Simply ask in natural English:
 
