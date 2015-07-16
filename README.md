@@ -78,8 +78,8 @@ var myModule = {
 	myMessageHandler: function (message) {
 		var chatId = message.chat.id;
 		var sender = message.from;
-		var senderFirstName = from.first_name;
-		var senderLastName = from.last_name;
+		var senderFirstName = sender.first_name;
+		var senderLastName = sender.last_name;
 		var messageText = message.text;
 	}
 }
