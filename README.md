@@ -26,5 +26,53 @@ KGRobot has a great memory.  Unfortunately, he often remembers things that peopl
 The KGRobot project was built from the ground up with extensibility in mind.  It is extremely easy to set up the project and build your own modules. Get creative!
 
 ### Project Setup
+1. Download MS Visual Studio Code: https://code.visualstudio.com/
+2. Clone the repository: `git clone git@konradgroup.git.beanstalkapp.com:/konradgroup/kgbot.git` NOTE: If you are not familiar with Git or don't have access, ask an SA for help!
+3. Install the project dependencies running `npm install` in the main project folder
+4. Open the project folder in Studio Code
+5. Switch to the debug tab (CMD + SHIFT D) and click the green arrow.
+
+Congratulations! You are now running your own local instance of KGRobot.
+
+### Creating your own module
+1. Create a new file for your module in the /modules directory.  The name should be {your_module}.js.
+2. Declare a new object that will provide your functionality and keep a reference to the core module:
+```
+var myModule = {
+	core: null,
+	
+	init: function () {
+		//YOUR INITIALIZATION CODE HERE
+	},
+	
+	//YOUR MODULE CODE HERE
+	
+	}
+```
+3. Declare that your module can be required by the primary module, and save a reference to the core module:
+```
+module.exports = function (core) {
+	myModule.core = core;
+	myModule.init();
+	return myModule;
+}
+```
+4. In the primary module, require your new module:
+```
+// Load modules
+require('./modules/lunch')(core);
+require('./modules/quotes')(core);
+require('./modules/myModule')(core);
+```
+
+### Subscribing to messages
+
+### Replying to messages
+
+### Saving data
+
+
+
+
 
 
