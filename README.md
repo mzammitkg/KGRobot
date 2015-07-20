@@ -99,7 +99,7 @@ If the bot receives a message that includes all of your keywords, the function p
 The core module provides a very easy way to respond to messages. You must provide the chatId and the text for the response.
 ```javascript
 this.core.telegram.sendMessage(message.chat.id, 'Your response text here');
-```javascript
+```
 
 ### Saving data
 The core module provides a very easy way to persist data for your module. You can access the storedData object from the core module as follows:
